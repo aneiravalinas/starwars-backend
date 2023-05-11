@@ -3,7 +3,7 @@ package com.trileuco.starwarsapi.model.swapi;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.List;
 
 public abstract class TransportSwapi extends BaseSwapi {
 
@@ -20,12 +20,12 @@ public abstract class TransportSwapi extends BaseSwapi {
     @JsonProperty(value = "cargo_capacity")
     private String cargoCapacity;
     private String consumables;
-    private String[] pilots;
-    private String[] films;
+    private List<String> pilots;
+    private List<String> films;
 
     public TransportSwapi(String name, String model, String manufacturer, String costInCredits, String length,
                           String maxAtmospheringSpeed, String crew, String passengers, String cargoCapacity, String consumables,
-                          String[] pilots, String[] films,
+                          List<String> pilots, List<String> films,
                           LocalDateTime created, LocalDateTime edited, String url) {
         super(created, edited, url);
         this.name = name;
@@ -122,19 +122,19 @@ public abstract class TransportSwapi extends BaseSwapi {
         this.consumables = consumables;
     }
 
-    public String[] getPilots() {
+    public List<String> getPilots() {
         return pilots;
     }
 
-    public void setPilots(String[] pilots) {
+    public void setPilots(List<String> pilots) {
         this.pilots = pilots;
     }
 
-    public String[] getFilms() {
+    public List<String> getFilms() {
         return films;
     }
 
-    public void setFilms(String[] films) {
+    public void setFilms(List<String> films) {
         this.films = films;
     }
 
@@ -151,8 +151,8 @@ public abstract class TransportSwapi extends BaseSwapi {
                 ", passengers='" + passengers + '\'' +
                 ", cargoCapacity='" + cargoCapacity + '\'' +
                 ", consumables='" + consumables + '\'' +
-                ", pilots=" + Arrays.toString(pilots) +
-                ", films=" + Arrays.toString(films) +
+                ", pilots=" + pilots +
+                ", films=" + films +
                 "} " + super.toString();
     }
 }

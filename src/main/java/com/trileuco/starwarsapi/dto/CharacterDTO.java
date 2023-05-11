@@ -1,17 +1,31 @@
 package com.trileuco.starwarsapi.dto;
 
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class CharacterDTO {
 
     private String name;
+    @JsonProperty(value = "birth_year")
     private String birthYear;
     private String gender;
+    @JsonProperty(value = "planet_name")
     private String planetName;
+    @JsonProperty(value = "fastest_vehicle_driven")
     private String fastestVehicle;
-    private Set<FilmDTO> films;
+    private List<FilmDTO> films;
 
     public CharacterDTO() {}
+
+    public CharacterDTO(String name, String birthYear, String gender, String planetName, String fastestVehicle, List<FilmDTO> films) {
+        this.name = name;
+        this.birthYear = birthYear;
+        this.gender = gender;
+        this.planetName = planetName;
+        this.fastestVehicle = fastestVehicle;
+        this.films = films;
+    }
 
     public String getName() {
         return name;
@@ -53,11 +67,11 @@ public class CharacterDTO {
         this.fastestVehicle = fastestVehicle;
     }
 
-    public Set<FilmDTO> getFilms() {
+    public List<FilmDTO> getFilms() {
         return films;
     }
 
-    public void setFilms(Set<FilmDTO> films) {
+    public void setFilms(List<FilmDTO> films) {
         this.films = films;
     }
 

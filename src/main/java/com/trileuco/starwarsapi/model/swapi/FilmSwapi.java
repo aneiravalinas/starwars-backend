@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FilmSwapi extends BaseSwapi {
 
@@ -17,30 +18,18 @@ public class FilmSwapi extends BaseSwapi {
     private String producer;
     @JsonProperty(value = "release_date")
     private LocalDate releaseDate;
-    private String[] characters;
-    private String[] planets;
-    private String[] starships;
-    private String[] vehicles;
-    private String[] species;
-    private LocalDateTime created;
-    private LocalDateTime edited;
-    private String url;
+    private List<String> characters;
+    private List<String> planets;
+    private List<String> starships;
+    private List<String> vehicles;
+    private List<String> species;
 
-    public FilmSwapi(String id, String title, String openingCrawl, String director, String producer, LocalDate releaseDate,
-                     String[] characters, String[] planets, String[] starships, String[] vehicles, String[] species,
-                     LocalDateTime created, LocalDateTime edited, String url) {
+    public FilmSwapi(LocalDateTime created, LocalDateTime edited, String url) {
         super(created, edited, url);
-        this.id = id;
-        this.title = title;
-        this.openingCrawl = openingCrawl;
-        this.director = director;
-        this.producer = producer;
-        this.releaseDate = releaseDate;
-        this.characters = characters;
-        this.planets = planets;
-        this.starships = starships;
-        this.vehicles = vehicles;
-        this.species = species;
+        this.characters = new ArrayList<>();
+        this.planets = new ArrayList<>();
+        this.starships = new ArrayList<>();
+        this.species = new ArrayList<>();
     }
 
     public String getId() {
@@ -91,43 +80,43 @@ public class FilmSwapi extends BaseSwapi {
         this.releaseDate = releaseDate;
     }
 
-    public String[] getCharacters() {
+    public List<String> getCharacters() {
         return characters;
     }
 
-    public void setCharacters(String[] characters) {
+    public void setCharacters(List<String> characters) {
         this.characters = characters;
     }
 
-    public String[] getPlanets() {
+    public List<String> getPlanets() {
         return planets;
     }
 
-    public void setPlanets(String[] planets) {
+    public void setPlanets(List<String> planets) {
         this.planets = planets;
     }
 
-    public String[] getStarships() {
+    public List<String> getStarships() {
         return starships;
     }
 
-    public void setStarships(String[] starships) {
+    public void setStarships(List<String> starships) {
         this.starships = starships;
     }
 
-    public String[] getVehicles() {
+    public List<String> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(String[] vehicles) {
+    public void setVehicles(List<String> vehicles) {
         this.vehicles = vehicles;
     }
 
-    public String[] getSpecies() {
+    public List<String> getSpecies() {
         return species;
     }
 
-    public void setSpecies(String[] species) {
+    public void setSpecies(List<String> species) {
         this.species = species;
     }
 
@@ -140,14 +129,11 @@ public class FilmSwapi extends BaseSwapi {
                 ", director='" + director + '\'' +
                 ", producer='" + producer + '\'' +
                 ", releaseDate=" + releaseDate +
-                ", characters=" + Arrays.toString(characters) +
-                ", planets=" + Arrays.toString(planets) +
-                ", starships=" + Arrays.toString(starships) +
-                ", vehicles=" + Arrays.toString(vehicles) +
-                ", species=" + Arrays.toString(species) +
-                ", created=" + created +
-                ", edited=" + edited +
-                ", url='" + url + '\'' +
+                ", characters=" + characters +
+                ", planets=" + planets +
+                ", starships=" + starships +
+                ", vehicles=" + vehicles +
+                ", species=" + species +
                 "} " + super.toString();
     }
 }

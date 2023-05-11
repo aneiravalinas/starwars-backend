@@ -1,13 +1,21 @@
 package com.trileuco.starwarsapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 
 public class FilmDTO {
 
     private String name;
+    @JsonProperty(value = "release_date")
     private LocalDate releaseDate;
 
     public FilmDTO() {}
+
+    public FilmDTO(String name, LocalDate releaseDate) {
+        this.name = name;
+        this.releaseDate = releaseDate;
+    }
 
     public String getName() {
         return name;

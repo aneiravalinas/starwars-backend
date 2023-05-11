@@ -3,10 +3,9 @@ package com.trileuco.starwarsapi.model.swapi;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.List;
 
 public class CharacterSwapi extends BaseSwapi {
-
     private String name;
     private String height;
     private String mass;
@@ -21,14 +20,13 @@ public class CharacterSwapi extends BaseSwapi {
     private String gender;
     @JsonProperty(value = "homeworld")
     private String homeWorld;
-    private String[] films;
-    private String[] species;
-    private String[] vehicles;
-    private String[] starships;
+    private List<String> films;
+    private List<String> species;
+    private List<String> vehicles;
+    private List<String> starships;
 
-    public CharacterSwapi(String name, String height, String mass, String hairColor, String skinColor, String eyeColor, String birthYear, String gender, String homeWorld,
-                          String[] films, String[] species, String[] vehicles, String[] starships,
-                          LocalDateTime created, LocalDateTime edited, String url) {
+    public CharacterSwapi(LocalDateTime created, LocalDateTime edited, String url, String name, String height, String mass, String hairColor, String skinColor, String eyeColor, String birthYear, String gender, String homeWorld,
+                          List<String> films, List<String> species, List<String> vehicles, List<String> starships) {
         super(created, edited, url);
         this.name = name;
         this.height = height;
@@ -117,35 +115,35 @@ public class CharacterSwapi extends BaseSwapi {
         this.homeWorld = homeWorld;
     }
 
-    public String[] getFilms() {
+    public List<String> getFilms() {
         return films;
     }
 
-    public void setFilms(String[] films) {
+    public void setFilms(List<String> films) {
         this.films = films;
     }
 
-    public String[] getSpecies() {
+    public List<String> getSpecies() {
         return species;
     }
 
-    public void setSpecies(String[] species) {
+    public void setSpecies(List<String> species) {
         this.species = species;
     }
 
-    public String[] getVehicles() {
+    public List<String> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(String[] vehicles) {
+    public void setVehicles(List<String> vehicles) {
         this.vehicles = vehicles;
     }
 
-    public String[] getStarships() {
+    public List<String> getStarships() {
         return starships;
     }
 
-    public void setStarships(String[] starships) {
+    public void setStarships(List<String> starships) {
         this.starships = starships;
     }
 
@@ -161,10 +159,11 @@ public class CharacterSwapi extends BaseSwapi {
                 ", birthYear='" + birthYear + '\'' +
                 ", gender='" + gender + '\'' +
                 ", homeWorld='" + homeWorld + '\'' +
-                ", films=" + Arrays.toString(films) +
-                ", species=" + Arrays.toString(species) +
-                ", vehicles=" + Arrays.toString(vehicles) +
-                ", starships=" + Arrays.toString(starships) +
+                ", films=" + films +
+                ", species=" + species +
+                ", vehicles=" + vehicles +
+                ", starships=" + starships +
                 "} " + super.toString();
     }
 }
+

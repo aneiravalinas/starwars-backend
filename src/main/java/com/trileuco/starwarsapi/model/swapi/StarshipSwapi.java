@@ -3,6 +3,7 @@ package com.trileuco.starwarsapi.model.swapi;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class StarshipSwapi extends TransportSwapi {
     @JsonProperty(value = "hyperdrive_rating")
@@ -12,7 +13,9 @@ public class StarshipSwapi extends TransportSwapi {
     @JsonProperty(value = "starship_class")
     private String starshipClass;
 
-    public StarshipSwapi(String name, String model, String manufacturer, String costInCredits, String length, String maxAtmospheringSpeed, String crew, String passengers, String cargoCapacity, String consumables, String[] pilots, String[] films, LocalDateTime created, LocalDateTime edited, String url, String hyperdriveRating, String mglt, String starshipClass) {
+    public StarshipSwapi(String name, String model, String manufacturer, String costInCredits, String length, String maxAtmospheringSpeed, String crew, String passengers, String cargoCapacity, String consumables,
+                         List<String> pilots, List<String> films,
+                         LocalDateTime created, LocalDateTime edited, String url, String hyperdriveRating, String mglt, String starshipClass) {
         super(name, model, manufacturer, costInCredits, length, maxAtmospheringSpeed, crew, passengers, cargoCapacity, consumables, pilots, films, created, edited, url);
         this.hyperdriveRating = hyperdriveRating;
         this.mglt = mglt;
