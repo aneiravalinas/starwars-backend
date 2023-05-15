@@ -3,7 +3,9 @@ package com.trileuco.starwarsapi.model.swapi;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class TransportSwapi extends BaseSwapi {
 
@@ -22,6 +24,11 @@ public abstract class TransportSwapi extends BaseSwapi {
     private String consumables;
     private List<String> pilots;
     private List<String> films;
+
+    public TransportSwapi() {
+        this.pilots = new ArrayList<>();
+        this.films = new ArrayList<>();
+    }
 
     public TransportSwapi(String name, String model, String manufacturer, String costInCredits, String length,
                           String maxAtmospheringSpeed, String crew, String passengers, String cargoCapacity, String consumables,
@@ -136,6 +143,14 @@ public abstract class TransportSwapi extends BaseSwapi {
 
     public void setFilms(List<String> films) {
         this.films = films;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TransportSwapi that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(name, that.name) && Objects.equals(model, that.model) && Objects.equals(manufacturer, that.manufacturer) && Objects.equals(costInCredits, that.costInCredits) && Objects.equals(length, that.length) && Objects.equals(maxAtmospheringSpeed, that.maxAtmospheringSpeed) && Objects.equals(crew, that.crew) && Objects.equals(passengers, that.passengers) && Objects.equals(cargoCapacity, that.cargoCapacity) && Objects.equals(consumables, that.consumables) && Objects.equals(pilots, that.pilots) && Objects.equals(films, that.films);
     }
 
     @Override

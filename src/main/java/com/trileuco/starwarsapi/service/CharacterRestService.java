@@ -2,11 +2,10 @@ package com.trileuco.starwarsapi.service;
 
 import com.trileuco.starwarsapi.dto.CharacterDTO;
 import com.trileuco.starwarsapi.dto.FilmDTO;
+import com.trileuco.starwarsapi.exception.character.CharacterNotFoundException;
 import com.trileuco.starwarsapi.model.Page;
 import com.trileuco.starwarsapi.model.swapi.*;
 import com.trileuco.starwarsapi.repository.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -43,6 +42,10 @@ public class CharacterRestService implements CharacterService {
         Integer count = pageSwapi.getCount();
         Integer next = null;
         Integer previous = null;
+
+        if ( count == 0 ) {
+            throw new CharacterNotFoundException("No characters found by name: " + name);
+        }
 
         if ( pageSwapi.getNext() != null ) {
             int nextLength = pageSwapi.getNext().length();
@@ -86,13 +89,13 @@ public class CharacterRestService implements CharacterService {
                 .max(Comparator.comparingInt(transport -> Integer.parseInt(transport.getMaxAtmospheringSpeed())))
                 .orElse(null);
 
+        String fastestTransportName = (fastestTransport != null) ? fastestTransport.getName() : null;
+
         String planetName = null;
 
         if ( characterSwapi.getHomeWorld() != null ) {
             planetName = this.planetRepository.findPlanetByPath(characterSwapi.getHomeWorld()).getName();
         }
-
-        String fastestTransportName = (fastestTransport != null) ? fastestTransport.getName() : null;
 
         return new CharacterDTO(characterSwapi.getName(), characterSwapi.getBirthYear(), characterSwapi.getGender(), planetName, fastestTransportName, filmDTOS);
     }

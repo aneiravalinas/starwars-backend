@@ -2,6 +2,7 @@ package com.trileuco.starwarsapi.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Page<T> {
 
@@ -51,6 +52,14 @@ public class Page<T> {
 
     public void setResults(List<T> results) {
         this.results = results;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Page<?> page = (Page<?>) o;
+        return Objects.equals(count, page.count) && Objects.equals(next, page.next) && Objects.equals(previous, page.previous) && Objects.equals(results, page.results);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.trileuco.starwarsapi.exception;
+package com.trileuco.starwarsapi.exception.character;
 
 public class CharacterNotFoundException extends RuntimeException {
 

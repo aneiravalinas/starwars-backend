@@ -3,7 +3,9 @@ package com.trileuco.starwarsapi.model.swapi;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CharacterSwapi extends BaseSwapi {
     private String name;
@@ -24,6 +26,13 @@ public class CharacterSwapi extends BaseSwapi {
     private List<String> species;
     private List<String> vehicles;
     private List<String> starships;
+
+    public CharacterSwapi() {
+        this.films = new ArrayList<>();
+        this.species = new ArrayList<>();
+        this.vehicles = new ArrayList<>();
+        this.starships = new ArrayList<>();
+    }
 
     public CharacterSwapi(LocalDateTime created, LocalDateTime edited, String url, String name, String height, String mass, String hairColor, String skinColor, String eyeColor, String birthYear, String gender, String homeWorld,
                           List<String> films, List<String> species, List<String> vehicles, List<String> starships) {
@@ -145,6 +154,20 @@ public class CharacterSwapi extends BaseSwapi {
 
     public void setStarships(List<String> starships) {
         this.starships = starships;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        CharacterSwapi that = (CharacterSwapi) o;
+        return Objects.equals(name, that.name) && Objects.equals(height, that.height) && Objects.equals(mass, that.mass) && Objects.equals(hairColor, that.hairColor) && Objects.equals(skinColor, that.skinColor) && Objects.equals(eyeColor, that.eyeColor) && Objects.equals(birthYear, that.birthYear) && Objects.equals(gender, that.gender) && Objects.equals(homeWorld, that.homeWorld) && Objects.equals(films, that.films) && Objects.equals(species, that.species) && Objects.equals(vehicles, that.vehicles) && Objects.equals(starships, that.starships);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, height, mass, hairColor, skinColor, eyeColor, birthYear, gender, homeWorld, films, species, vehicles, starships);
     }
 
     @Override

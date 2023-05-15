@@ -3,6 +3,7 @@ package com.trileuco.starwarsapi.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class FilmDTO {
 
@@ -31,6 +32,14 @@ public class FilmDTO {
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FilmDTO filmDTO = (FilmDTO) o;
+        return Objects.equals(name, filmDTO.name) && Objects.equals(releaseDate, filmDTO.releaseDate);
     }
 
     @Override

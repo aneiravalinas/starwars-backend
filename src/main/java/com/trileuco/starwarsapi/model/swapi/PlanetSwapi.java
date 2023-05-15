@@ -3,7 +3,9 @@ package com.trileuco.starwarsapi.model.swapi;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PlanetSwapi extends BaseSwapi {
 
@@ -36,6 +38,11 @@ public class PlanetSwapi extends BaseSwapi {
         this.population = population;
         this.residents = residents;
         this.films = films;
+    }
+
+    public PlanetSwapi() {
+        this.residents = new ArrayList<>();
+        this.films = new ArrayList<>();
     }
 
     public String getName() {
@@ -124,6 +131,15 @@ public class PlanetSwapi extends BaseSwapi {
 
     public void setFilms(List<String> films) {
         this.films = films;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        PlanetSwapi that = (PlanetSwapi) o;
+        return Objects.equals(name, that.name) && Objects.equals(rotationPeriod, that.rotationPeriod) && Objects.equals(orbitalPeriod, that.orbitalPeriod) && Objects.equals(diameter, that.diameter) && Objects.equals(climate, that.climate) && Objects.equals(gravity, that.gravity) && Objects.equals(terrain, that.terrain) && Objects.equals(surfaceWater, that.surfaceWater) && Objects.equals(population, that.population) && Objects.equals(residents, that.residents) && Objects.equals(films, that.films);
     }
 
     @Override

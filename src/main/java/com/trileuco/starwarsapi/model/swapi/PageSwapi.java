@@ -2,6 +2,7 @@ package com.trileuco.starwarsapi.model.swapi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PageSwapi<T> {
     private Integer count;
@@ -50,6 +51,14 @@ public class PageSwapi<T> {
 
     public void setResults(List<T> results) {
         this.results = results;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PageSwapi<?> pageSwapi = (PageSwapi<?>) o;
+        return Objects.equals(count, pageSwapi.count) && Objects.equals(next, pageSwapi.next) && Objects.equals(previous, pageSwapi.previous) && Objects.equals(results, pageSwapi.results);
     }
 
     @Override

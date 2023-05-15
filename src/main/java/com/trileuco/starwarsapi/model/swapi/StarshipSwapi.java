@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 public class StarshipSwapi extends TransportSwapi {
     @JsonProperty(value = "hyperdrive_rating")
@@ -12,6 +13,8 @@ public class StarshipSwapi extends TransportSwapi {
     private String mglt;
     @JsonProperty(value = "starship_class")
     private String starshipClass;
+
+    public StarshipSwapi() {}
 
     public StarshipSwapi(String name, String model, String manufacturer, String costInCredits, String length, String maxAtmospheringSpeed, String crew, String passengers, String cargoCapacity, String consumables,
                          List<String> pilots, List<String> films,
@@ -44,6 +47,14 @@ public class StarshipSwapi extends TransportSwapi {
 
     public void setStarshipClass(String starshipClass) {
         this.starshipClass = starshipClass;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof StarshipSwapi that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(hyperdriveRating, that.hyperdriveRating) && Objects.equals(mglt, that.mglt) && Objects.equals(starshipClass, that.starshipClass);
     }
 
     @Override

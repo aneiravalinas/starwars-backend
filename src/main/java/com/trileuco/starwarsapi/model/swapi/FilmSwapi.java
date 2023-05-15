@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FilmSwapi extends BaseSwapi {
 
@@ -26,6 +27,13 @@ public class FilmSwapi extends BaseSwapi {
 
     public FilmSwapi(LocalDateTime created, LocalDateTime edited, String url) {
         super(created, edited, url);
+        this.characters = new ArrayList<>();
+        this.planets = new ArrayList<>();
+        this.starships = new ArrayList<>();
+        this.species = new ArrayList<>();
+    }
+
+    public FilmSwapi() {
         this.characters = new ArrayList<>();
         this.planets = new ArrayList<>();
         this.starships = new ArrayList<>();
@@ -118,6 +126,15 @@ public class FilmSwapi extends BaseSwapi {
 
     public void setSpecies(List<String> species) {
         this.species = species;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        FilmSwapi filmSwapi = (FilmSwapi) o;
+        return Objects.equals(id, filmSwapi.id) && Objects.equals(title, filmSwapi.title) && Objects.equals(openingCrawl, filmSwapi.openingCrawl) && Objects.equals(director, filmSwapi.director) && Objects.equals(producer, filmSwapi.producer) && Objects.equals(releaseDate, filmSwapi.releaseDate) && Objects.equals(characters, filmSwapi.characters) && Objects.equals(planets, filmSwapi.planets) && Objects.equals(starships, filmSwapi.starships) && Objects.equals(vehicles, filmSwapi.vehicles) && Objects.equals(species, filmSwapi.species);
     }
 
     @Override

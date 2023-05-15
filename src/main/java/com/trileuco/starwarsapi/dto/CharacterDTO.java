@@ -2,7 +2,9 @@ package com.trileuco.starwarsapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CharacterDTO {
 
@@ -16,7 +18,9 @@ public class CharacterDTO {
     private String fastestVehicle;
     private List<FilmDTO> films;
 
-    public CharacterDTO() {}
+    public CharacterDTO() {
+        this.films = new ArrayList<>();
+    }
 
     public CharacterDTO(String name, String birthYear, String gender, String planetName, String fastestVehicle, List<FilmDTO> films) {
         this.name = name;
@@ -73,6 +77,14 @@ public class CharacterDTO {
 
     public void setFilms(List<FilmDTO> films) {
         this.films = films;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CharacterDTO that = (CharacterDTO) o;
+        return Objects.equals(name, that.name) && Objects.equals(birthYear, that.birthYear) && Objects.equals(gender, that.gender) && Objects.equals(planetName, that.planetName) && Objects.equals(fastestVehicle, that.fastestVehicle) && Objects.equals(films, that.films);
     }
 
     @Override

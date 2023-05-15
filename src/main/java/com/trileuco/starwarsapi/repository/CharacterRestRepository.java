@@ -1,7 +1,6 @@
 package com.trileuco.starwarsapi.repository;
 
-import com.trileuco.starwarsapi.exception.CharacterNotFoundException;
-import com.trileuco.starwarsapi.exception.PageCharacterNotFoundException;
+import com.trileuco.starwarsapi.exception.ClientException;
 import com.trileuco.starwarsapi.model.swapi.PageSwapi;
 import com.trileuco.starwarsapi.model.swapi.CharacterSwapi;
 import org.springframework.core.ParameterizedTypeReference;
@@ -18,33 +17,27 @@ public class CharacterRestRepository {
 
     private final WebClient webClient;
     private final static ParameterizedTypeReference<PageSwapi<CharacterSwapi>> typeReference = new ParameterizedTypeReference<>() {};
-    public CharacterRestRepository(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder
-                .baseUrl("https://swapi.trileuco.com/api/people")
-                .build();
+    public CharacterRestRepository(WebClient swapiWebClient) {
+        this.webClient = swapiWebClient;
     }
 
     public PageSwapi<CharacterSwapi> findCharacters(String name, int numPage) {
-        PageSwapi<CharacterSwapi> page = webClient.get()
+        return webClient.get()
                     .uri(uriBuilder -> uriBuilder
+                            .pathSegment("people")
                             .queryParam("page", numPage)
                             .queryParamIfPresent("search", Optional.ofNullable(name)).build())
                     .retrieve()
-                    .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> {
-                        if ( clientResponse.statusCode().isSameCodeAs(HttpStatus.NOT_FOUND) ) {
-                            return Mono.error(new PageCharacterNotFoundException("Character page " + numPage + " is empty"));
+                    .onStatus(HttpStatusCode::isError, response -> {
+                        if ( response.statusCode().isSameCodeAs(HttpStatus.NOT_FOUND) ) {
+                            return Mono.error(new ClientException(HttpStatus.NOT_FOUND, String.format("Character page number %s doesn't exist", numPage)));
                         }
 
-                        return clientResponse.createException();
+                        return Mono.error(ClientException.from(response.statusCode()));
                     })
                     .bodyToMono(typeReference)
                     .block();
-
-        if ( page != null && page.getCount() == 0 ) {
-            throw new CharacterNotFoundException("Not character found by name: " + name);
-        }
-
-        return page;
     }
+
 }
 
