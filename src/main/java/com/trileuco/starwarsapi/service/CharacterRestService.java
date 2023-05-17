@@ -6,6 +6,7 @@ import com.trileuco.starwarsapi.exception.character.CharacterNotFoundException;
 import com.trileuco.starwarsapi.model.Page;
 import com.trileuco.starwarsapi.model.swapi.*;
 import com.trileuco.starwarsapi.repository.*;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -36,6 +37,7 @@ public class CharacterRestService implements CharacterService {
     }
 
     @Override
+    @Cacheable(cacheNames = "characters", condition = "#numPage < 4 && #name == null")
     public Page<CharacterDTO> findCharacters(String name, Integer numPage) {
         PageSwapi<CharacterSwapi> pageSwapi = this.characterRepository.findCharacters(name, numPage);
 

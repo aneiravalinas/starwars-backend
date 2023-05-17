@@ -2,6 +2,7 @@ package com.trileuco.starwarsapi.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +16,7 @@ import reactor.netty.http.client.HttpClient;
 import java.util.List;
 
 @Configuration
+@EnableCaching
 public class AppConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(AppConfig.class);
