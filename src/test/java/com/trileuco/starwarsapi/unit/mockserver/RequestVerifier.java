@@ -1,4 +1,4 @@
-package com.trileuco.starwarsapi.mockserver;
+package com.trileuco.starwarsapi.unit.mockserver;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;

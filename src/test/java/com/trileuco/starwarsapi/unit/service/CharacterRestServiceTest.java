@@ -1,4 +1,4 @@
-package com.trileuco.starwarsapi.service;
+package com.trileuco.starwarsapi.unit.service;
 
 import com.trileuco.starwarsapi.dto.CharacterDTO;
 import com.trileuco.starwarsapi.dto.FilmDTO;
@@ -6,6 +6,7 @@ import com.trileuco.starwarsapi.exception.character.CharacterNotFoundException;
 import com.trileuco.starwarsapi.model.Page;
 import com.trileuco.starwarsapi.model.swapi.*;
 import com.trileuco.starwarsapi.repository.*;
+import com.trileuco.starwarsapi.service.CharacterRestService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -217,13 +218,6 @@ public class CharacterRestServiceTest {
 
         given(starshipRestRepository.findStarshipByPath(anyString()))
                 .willReturn(getDefaultStarshipSwapi());
-
-        Page<CharacterDTO> expectedPage = new Page<>(
-                1,
-                null,
-                null,
-                List.of(getDefaultCharacterDTO())
-        );
 
         Page<CharacterDTO> resultPage = cut.findCharacters(anyString(), anyInt());
 

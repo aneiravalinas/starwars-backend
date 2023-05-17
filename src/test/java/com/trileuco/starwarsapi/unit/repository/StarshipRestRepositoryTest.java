@@ -1,8 +1,9 @@
-package com.trileuco.starwarsapi.repository;
+package com.trileuco.starwarsapi.unit.repository;
 
 import com.trileuco.starwarsapi.exception.ClientException;
-import com.trileuco.starwarsapi.mockserver.MockServer;
-import com.trileuco.starwarsapi.model.swapi.FilmSwapi;
+import com.trileuco.starwarsapi.unit.mockserver.MockServer;
+import com.trileuco.starwarsapi.model.swapi.StarshipSwapi;
+import com.trileuco.starwarsapi.repository.StarshipRestRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,11 +20,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class FilmRestRepositoryTest {
+public class StarshipRestRepositoryTest {
 
-    private static final String FILM_PATH = "/films/1";
+    private static final String STARSHIP_PATH = "/starships/1";
     private static MockServer mockServer;
-    private FilmRestRepository cut;
+    private StarshipRestRepository cut;
 
     @BeforeAll
     static void beforeAll() {
@@ -37,55 +38,55 @@ public class FilmRestRepositoryTest {
 
     @BeforeEach
     void setup() {
-        cut = new FilmRestRepository(mockServer.getWebClient());
+        cut = new StarshipRestRepository(mockServer.getWebClient());
     }
 
     @Test
-    void findFilmByPathShouldRequestCorrectPathAndStatus() {
+    void findStarshipByPathShouldRequestCorrectPathAndMethod() {
         Map<String, String> header = Collections
                 .singletonMap(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
-        String path = mockServer.getMockServerUrl() + FILM_PATH;
-        FilmSwapi film = new FilmSwapi();
+        String path = mockServer.getMockServerUrl() + STARSHIP_PATH;
+        StarshipSwapi starship = new StarshipSwapi();
 
-        mockServer.responseWith(HttpStatus.OK, film, header);
-        cut.findFilmByPath(path);
+        mockServer.responseWith(HttpStatus.OK, starship, header);
+        cut.findStarshipByPath(path);
 
         mockServer.takeRequest()
                 .expectMethod(HttpMethod.GET.name())
-                .expectPath(FILM_PATH);
+                .expectPath(STARSHIP_PATH);
     }
 
     @Test
-    void findFilmByPathShouldRetrieveFilm() {
+    void findStarshipByPathShouldRetrieveStarship() {
         Map<String, String> header = Collections
                 .singletonMap(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
-        String path = mockServer.getMockServerUrl() + FILM_PATH;
-        FilmSwapi film = new FilmSwapi();
-        film.setUrl(path);
+        String path = mockServer.getMockServerUrl() + STARSHIP_PATH;
+        StarshipSwapi starship = new StarshipSwapi();
+        starship.setUrl(path);
 
-        mockServer.responseWith(HttpStatus.OK, film, header);
-        FilmSwapi result = cut.findFilmByPath(path);
-        assertEquals(film, result);
+        mockServer.responseWith(HttpStatus.OK, starship, header);
+        StarshipSwapi result = cut.findStarshipByPath(path);
+        assertEquals(starship, result);
     }
 
     @Test
-    void findFilmByPathShouldReturnsClientErrorWhenServerRespondsWith4xxError() {
+    void findStarshipByPathShouldReturnsClientErrorWhenServerRespondsWith4xxError() {
         mockServer.responseWith(HttpStatus.NOT_FOUND);
-        String path = mockServer.getMockServerUrl() + FILM_PATH;
+        String path = mockServer.getMockServerUrl() + STARSHIP_PATH;
 
-        ClientException clientException = assertThrows(ClientException.class, () -> cut.findFilmByPath(path));
+        ClientException clientException = assertThrows(ClientException.class, () -> cut.findStarshipByPath(path));
         assertEquals(HttpStatus.NOT_FOUND, clientException.getStatus(), "Unexpected HttpStatus code");
         mockServer.clearRequest();
     }
 
     @Test
-    void findFilmByPathShouldReturnsServerErrorWhenServerRespondsWith5xxError() {
+    void findStarshipByPathShouldReturnsServerErrorWhenServerRespondsWith5xxError() {
         mockServer.responseWith(HttpStatus.INTERNAL_SERVER_ERROR);
-        String path = mockServer.getMockServerUrl() + FILM_PATH;
+        String path = mockServer.getMockServerUrl() + STARSHIP_PATH;
 
-        ClientException clientException = assertThrows(ClientException.class, () -> cut.findFilmByPath(path));
+        ClientException clientException = assertThrows(ClientException.class, () -> cut.findStarshipByPath(path));
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, clientException.getStatus(), "Unexpected HttpStatus code");
         mockServer.clearRequest();
     }

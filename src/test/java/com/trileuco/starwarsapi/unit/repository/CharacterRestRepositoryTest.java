@@ -1,9 +1,10 @@
-package com.trileuco.starwarsapi.repository;
+package com.trileuco.starwarsapi.unit.repository;
 
 import com.trileuco.starwarsapi.exception.ClientException;
-import com.trileuco.starwarsapi.mockserver.MockServer;
+import com.trileuco.starwarsapi.unit.mockserver.MockServer;
 import com.trileuco.starwarsapi.model.swapi.CharacterSwapi;
 import com.trileuco.starwarsapi.model.swapi.PageSwapi;
+import com.trileuco.starwarsapi.repository.CharacterRestRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.trileuco.starwarsapi.mockserver;
+package com.trileuco.starwarsapi.unit.mockserver;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
