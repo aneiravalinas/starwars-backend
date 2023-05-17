@@ -3,10 +3,7 @@ package com.trileuco.starwarsapi.controller;
 import com.trileuco.starwarsapi.dto.CharacterDTO;
 import com.trileuco.starwarsapi.model.Page;
 import com.trileuco.starwarsapi.service.CharacterService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
