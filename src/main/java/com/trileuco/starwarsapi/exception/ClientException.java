@@ -18,16 +18,6 @@ public class ClientException extends RuntimeException {
         return new ClientException(status, message);
     }
 
-    public static boolean isClientError(Throwable throwable) {
-        return throwable instanceof ClientException
-                && ((ClientException) throwable).isClientError();
-    }
-
-    public static boolean isServerError(Throwable throwable) {
-        return throwable instanceof ClientException
-                && ((ClientException) throwable).isServerError();
-    }
-
     public boolean isClientError() {
         return status.is4xxClientError();
     }
